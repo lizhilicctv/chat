@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>客服 </title>
+		<link rel="stylesheet" type="text/css" href="__INDEX__font_Icon/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="__INDEX__css/chat.css">
+	</head>
+	<body>
+
+		<div class="chatContainer">
+			<div class="chatBtn">
+				<i class="iconfont icon-xiaoxi1"></i>
+			</div>
+			<div class="chat-message-num"></div>
+			<div class="chatBox" ref="chatBox">
+				<div class="chatBox-head">
+					<div class="chatBox-head-one">
+						标天聊天系统
+						<div class="chat-close" style="margin: 10px 10px 0 0;font-size: 14px">关闭</div>
+					</div>
+					
+					<div class="chatBox-head-two" data='0'>
+						<div class="chat-return">返回</div>
+						<div class="chat-people">
+							<div class="ChatInfoHead">
+								<img src="" alt="头像">
+							</div>
+							<div class="ChatInfoName"></div>
+						</div>
+						<div class="chat-close">关闭</div>
+					</div>
+					
+				</div>
+				<div class="chatBox-info">
+					<div class="chatBox-list" ref="chatBoxlist">
+						
+						{volist name="data" id="vo"}	
+							<div onclick="dianji({$vo.id})" class="chat-list-people" data='{$vo.id}' iszai='0'>
+								<div><img style="filter: grayscale(100%);" src="{$vo.img ?? '__INDEX__img/icon02.png'}" alt="头像"></div>
+								<div class="chat-name">
+									<p style="color: #BBBBBB;">{$vo.name}</p>
+								</div>
+								<div class="message-num"></div>
+							</div>
+						
+						{/volist}
+						<script type="text/javascript">
+							let msg_arr={};
+							{volist name="data" id="vo"}
+								msg_arr[{$vo.id}]=[];
+							{/volist}
+						</script>
+					</div>
+					
+					
+					<div class="chatBox-kuang" ref="chatBoxkuang">
+						<div class="chatBox-content">
+							<div style="text-align: center;color: #666;" onclick="more()">加载更多</div>
+							<div class="chatBox-content-demo" id="chatBox-content-demo">
+								
+								
+
+							</div>
+						</div>
+						<div class="chatBox-send">
+							<div class="div-textarea" contenteditable="true"></div>
+							<div>
+								<button id="chat-biaoqing" class="btn-default-styles">
+									<i class="iconfont icon-biaoqing"></i>
+								</button>
+								<label id="chat-tuxiang" title="发送图片" for="inputImage" class="btn-default-styles">
+									<input type="file" onchange="selectImg(this)" accept="image/jpg,image/jpeg,image/png" name="file" id="inputImage"
+									 class="hidden">
+									<i class="iconfont icon-tuxiang"></i>
+								</label>
+								<button id="chat-fasong" class="btn-default-styles"><i class="iconfont icon-fasong"></i>
+								</button>
+							</div>
+							<div class="biaoqing-photo">
+								<ul>
+									<li><span class="emoji-picker-image" style="background-position: -9px -18px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -40px -18px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -71px -18px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -102px -18px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -133px -18px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -164px -18px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -9px -52px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -40px -52px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -71px -52px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -102px -52px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -133px -52px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -164px -52px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -9px -86px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -40px -86px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -71px -86px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -102px -86px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -133px -86px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -164px -86px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -9px -120px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -40px -120px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -71px -120px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -102px -120px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -133px -120px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -164px -120px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -9px -154px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -40px -154px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -71px -154px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -102px -154px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -133px -154px;"></span></li>
+									<li><span class="emoji-picker-image" style="background-position: -164px -154px;"></span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="__INDEX__js/jquery.min.js"></script>
+		<script src="__INDEX__js/main.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//这个是聊天系统的核心文件
+				if ("WebSocket" in window) {
+					
+					//打开一个 web socket
+					var ws = new WebSocket("ws://127.0.0.1:8282");
+					ws.onopen = function() {
+						let data={ //初始化操作
+							type:'init',
+							formid:"main"   //这里默认客服编号为1
+						};
+						ws.send(JSON.stringify(data));
+					};
+					ws.onmessage = function(evt) {
+						var msg = JSON.parse(evt.data);
+						if(msg.type=='say_main_text'){
+							playSound()
+							if($('.chatBox-head-two').attr('data') ==msg.formid ){
+								//直接添加到框里面
+								let img=$('.chat-list-people[data='+msg.formid+']').find('img').attr('src');
+								jia_num(msg.msg,msg.time,img)
+								if(!$('.chatBox-head-two').is(':visible')){
+									$('.chatBox-list .chat-list-people').each(function(){
+										if($(this).attr("data")==msg.formid){
+											let num=Number($(this).find('.message-num').text());
+											$(this).find('.message-num').html(num+1)
+										}
+									});
+									let messagenum=Number($('.chat-message-num').text());
+									$('.chat-message-num').html(messagenum+1)
+								}else{
+									$.post(
+									 "{:url('index/ajax')}",
+									{
+										type:'main_yi_du',
+										formid:msg.formid
+									},
+									function(res){});
+								}
+								
+							}else{
+								$('.chatBox-list .chat-list-people').each(function(){
+									if($(this).attr("data")==msg.formid){
+										let num=Number($(this).find('.message-num').text());
+										$(this).find('.message-num').html(num+1)
+									}
+								});
+								let messagenum=Number($('.chat-message-num').text());
+								$('.chat-message-num').html(messagenum+1)
+							}
+							
+							msg_arr[msg.formid].push(msg)
+							//添加数据
+							//jia_num(msg.msg,msg.time);
+						}
+						if(msg.type=='say_main_biao'){
+							playSound()
+							if($('.chatBox-head-two').attr('data') ==msg.formid ){
+								//直接添加到框里面
+								let img=$('.chat-list-people[data='+msg.formid+']').find('img').attr('src');
+								jia_num(msg.msg,msg.time,img)
+								if(!$('.chatBox-head-two').is(':visible')){
+									$('.chatBox-list .chat-list-people').each(function(){
+										if($(this).attr("data")==msg.formid){
+											let num=Number($(this).find('.message-num').text());
+											$(this).find('.message-num').html(num+1)
+										}
+									});
+									let messagenum=Number($('.chat-message-num').text());
+									$('.chat-message-num').html(messagenum+1)
+								}else{
+									$.post(
+									 "{:url('index/ajax')}",
+									{
+										type:'main_yi_du',
+										formid:msg.formid
+									},
+									function(res){});
+								}
+								
+							}else{
+								$('.chatBox-list .chat-list-people').each(function(){
+									if($(this).attr("data")==msg.formid){
+										let num=Number($(this).find('.message-num').text());
+										$(this).find('.message-num').html(num+1)
+									}
+								});
+								let messagenum=Number($('.chat-message-num').text());
+								$('.chat-message-num').html(messagenum+1)
+							}
+							msg_arr[msg.formid].push(msg)
+							//添加数据
+							//jia_num(msg.msg,msg.time);
+						}
+						if(msg.type=='say_main_img'){
+							playSound()
+							if($('.chatBox-head-two').attr('data') ==msg.formid ){
+								//直接添加到框里面
+								let img=$('.chat-list-people[data='+msg.formid+']').find('img').attr('src');
+								jia_num(msg.msg,msg.time,img,'img')
+								if(!$('.chatBox-head-two').is(':visible')){
+									$('.chatBox-list .chat-list-people').each(function(){
+										if($(this).attr("data")==msg.formid){
+											let num=Number($(this).find('.message-num').text());
+											$(this).find('.message-num').html(num+1)
+										}
+									});
+									let messagenum=Number($('.chat-message-num').text());
+									$('.chat-message-num').html(messagenum+1)
+								}else{
+									$.post(
+									 "{:url('index/ajax')}",
+									{
+										type:'main_yi_du',
+										formid:msg.formid
+									},
+									function(res){});
+								}
+								
+							}else{
+								$('.chatBox-list .chat-list-people').each(function(){
+									if($(this).attr("data")==msg.formid){
+										let num=Number($(this).find('.message-num').text());
+										$(this).find('.message-num').html(num+1)
+									}
+								});
+								let messagenum=Number($('.chat-message-num').text());
+								$('.chat-message-num').html(messagenum+1)
+							}
+							msg_arr[msg.formid].push(msg)
+							//添加数据
+							//jia_num(msg.msg,msg.time);
+						}
+						if(msg.type=='main_shang'){ //导入谁在线
+							let on_arr=msg.on_arr
+							$('.chat-list-people').each(function(){
+								if($(this).attr('data') in on_arr){
+									$(this).attr('iszai',1);
+									$(this).find('img').css("filter","grayscale(0%)");
+								}
+							});
+						}
+						if(msg.type=='uid_on'){ //有人上线了
+							$('.chat-list-people').each(function(){
+								if($(this).attr('data') == msg.formid){
+									$(this).attr('iszai',1);
+									$(this).find('img').css("filter","grayscale(0%)");
+								}
+							});
+						}
+						if(msg.type=='uid_off'){ //有人下线了
+							$('.chat-list-people').each(function(){
+								if($(this).attr('data') == msg.uid){
+									$(this).attr('iszai',0);
+									$(this).find('img').css("filter","grayscale(100%)");
+								}
+							});
+						}
+						console.log(msg)
+					};
+					ws.onclose = function() {
+						// 关闭 websocket
+						alert("连接已关闭...");
+					};
+				} else {
+					// 浏览器不支持 WebSocket
+					alert("您的浏览器不支持 WebSocket!");
+				}
+				//      发送信息
+				$("#chat-fasong").click(function() {
+					var textContent = $(".div-textarea").html().replace(/[\n\r]/g, '<br>')
+					let data={ //初始化操作
+						type:'say_zi_text',
+						toid: window.dataid,   
+						msg:textContent
+					};
+					ws.send(JSON.stringify(data));
+					//把文字保存在数据库
+					$.post(
+					 "{:url('index/ajax')}",
+					{
+						type:'text',
+						data:textContent,
+						formid:'main',
+						toid:window.dataid
+					},
+					function(res){});
+					
+					if (textContent != "") {
+						$(".chatBox-content-demo").append(
+							`<div class="clearfloat">
+								<div class="author-name">
+									<small class="chat-date">${new Date().toLocaleString()}</small>
+								</div>
+								<div class="right">
+									<div class="chat-message">${textContent}</div>
+									<div class="chat-avatars"><img src="__INDEX__img/icon02.png" alt="头像"></div>
+								</div>
+							</div>`
+						);
+						//发送后清空输入框
+						$(".div-textarea").html("");
+						//聊天框默认最底部
+						$(document).ready(function() {
+							$("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+						});
+					}
+				});
+				function jia_num(msg,time,img,type){
+					console.log(msg)
+					
+					
+					if(type=='img'){
+						//把字放到上面去
+						$(".chatBox-content-demo").append(
+							`<div class="clearfloat">
+								<div class="author-name">
+									<small class="chat-date">${time}</small>
+								</div>
+								<div class="left">
+									<div class="chat-avatars"><img src="${img}" alt="头像"></div>
+									<div class="chat-message">
+										<img src="${msg}" >
+									</div>
+								</div>
+							</div>`
+						);
+					}else{
+						//把字放到上面去
+						$(".chatBox-content-demo").append(
+							`<div class="clearfloat">
+								<div class="author-name">
+									<small class="chat-date">${time}</small>
+								</div>
+								<div class="left">
+									<div class="chat-avatars"><img src="${img}" alt="头像"></div>
+									<div class="chat-message">
+										${msg}
+									</div>
+								</div>
+							</div>`
+						);
+					}
+					
+					
+				}	
+				
+				function dianji(e){
+					$(".chatBox-content-demo").text('');
+					//获取发过来的头像
+					let img=$('.chat-list-people[data='+e+']').find('img').attr('src');
+
+					//把数据添加上去了,
+					console.log(msg_arr)
+					for (let a in msg_arr[e]) {
+						if(msg_arr[e][a].msg.slice(1,5)=='chat'){
+							jia_num(msg_arr[e][a].msg,msg_arr[e][a].time,img,'img');
+						}else{
+							jia_num(msg_arr[e][a].msg,msg_arr[e][a].time,img);
+						}
+						
+					}
+					//修改数据
+					//msg_arr[e]=[];
+					let a=$('.chat-list-people[data='+e+']').find('.message-num').text();
+					
+					$('.chat-list-people').each(function(){
+						if($(this).attr('data') == e){
+							$(this).find('.message-num').text('');
+						}
+					});
+					let messagenum=Number($('.chat-message-num').text());
+					
+					if(messagenum-a == 0){
+						$('.chat-message-num').html('')
+					}else{
+						$('.chat-message-num').html(messagenum-a)
+					}
+				}
+				
+				//选择表情
+				$(".emoji-picker-image").each(function() {
+					$(this).click(function() {
+						var bq = $(this).parent().html();
+						let data={ //初始化操作
+							type:'say_zi_biao',
+							toid: window.dataid,  
+							msg:bq
+						};
+						ws.send(JSON.stringify(data));
+						//把表情保存在数据库
+						$.post(
+						 "{:url('index/ajax')}",
+						{
+							type:'biao',
+							data:bq,
+							formid:'main',
+							toid:window.dataid
+						},
+						function(res){});
+						$(".chatBox-content-demo").append(
+							`<div class="clearfloat">
+								<div class="author-name">
+									<small class="chat-date">${new Date().toLocaleString()}</small>
+								</div>
+								<div class="right">
+									<div class="chat-message">${bq}</div>
+									<div class="chat-avatars"><img src="__INDEX__img/icon02.png" alt="头像"></div>
+								</div>
+							</div>`
+						);
+						//发送后关闭表情框
+						$(".biaoqing-photo").toggle();
+						//聊天框默认最底部
+						$(document).ready(function() {
+							$("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+						});
+					})
+				});
+				
+				
+				//发送图片
+				function selectImg(pic) {
+					if (!pic.files || !pic.files[0]) {
+						return;
+					}
+					var reader = new FileReader();
+					reader.onload = function(evt) {
+						var images = evt.target.result;
+						//先ajax 返回成功在发送
+						 $.post(
+						 "{:url('index/ajax')}",
+						{
+							type:'img',
+							data:images,
+							formid:'main',
+							toid:window.dataid
+						},
+						function(res){
+							if(res==0){
+								alert('图片上传错误');
+								return false
+							}else{
+								let data={ //初始化操作
+									type:'say_zi_img',
+									toid: window.dataid,    
+									msg:res
+								};
+								ws.send(JSON.stringify(data));
+							}
+						});
+						$(".chatBox-content-demo").append(
+							`<div class="clearfloat">
+								<div class="author-name">
+									<small class="chat-date">${new Date().toLocaleString()}</small>
+								</div>
+								<div class="right">
+									<div class="chat-message"><img src="${images}"></div>
+									<div class="chat-avatars"><img src="__INDEX__img/icon02.png" alt="头像"></div>
+								</div>
+							</div>`
+						);
+						//聊天框默认最底部
+						$(document).ready(function() {
+							$("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+						});
+					};
+					reader.readAsDataURL(pic.files[0]);
+				}
+				
+				//读取未读信息
+				{volist name="wei" id="vo"}
+					msg_arr[{$vo.formid}].push({type: {if $vo.type==1}"say_main_text"{elseif $vo.type==2 /}"say_main_biao"{else /}"say_main_img"{/if}, msg: '{$vo.data|raw}', formid: {$vo.formid}, time: "{$vo.time}"})
+					$('.chat-message-num').html(Number($('.chat-message-num').text())+1)
+					$('.chat-list-people').each(function(){
+						if($(this).attr("data")=={$vo.formid}){
+							$(this).find('.message-num').html(Number($(this).find('.message-num').text())+1)
+						}
+					})	
+				{/volist}
+				
+				
+				
+				//点击加载更多
+				function more(){
+					let time=0
+					if(!!$('.chatBox-content-demo .chat-date')[0]){
+						time=$('.chatBox-content-demo .chat-date').eq(0).text()
+					}
+					
+					$.post(
+					 "{:url('index/ajax')}",
+					{
+						type:'more',
+						formid:'main',
+						toid:window.dataid,
+						time:time
+					},
+					function(res){
+						console.log(res)
+						for (let i in res) {
+							 zhui(res[i].time,res[i].data,res[i].type,res[i].toid)
+						}
+					});
+				}
+				
+				//上面追加内容
+				function zhui(time,msg,type,toid){
+					let img=$('.chat-list-people[data='+toid+']').find('img').attr('src');
+					let html='';
+					if(type==3){
+						html='<div class="chat-message"><img src="'+msg+'"></div>';
+					}else{
+						html='<div class="chat-message">'+msg+'</div>';
+					}
+					if(toid!='main'){
+						$(".chatBox-content-demo").prepend(
+							`<div class="clearfloat">
+								<div class="author-name">
+									<small class="chat-date">${time}</small>
+								</div>
+								<div class="right">`+html
+									+`<div class="chat-avatars"><img src="${img}" alt="头像"></div>
+								</div>
+							</div>`
+						);
+					}else{
+						$(".chatBox-content-demo").prepend(
+							`<div class="clearfloat">
+								<div class="author-name">
+									<small class="chat-date">${time}</small>
+								</div>
+								<div class="left">
+									<div class="chat-avatars"><img src="__INDEX__img/icon02.png" alt="头像"></div>`+
+									html+
+								`</div>
+							</div>`
+						);
+					}
+					
+				}
+		</script>
+		<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+		</div>
+	</body>
+</html>
