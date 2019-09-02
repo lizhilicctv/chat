@@ -384,7 +384,7 @@
 			
 			//把数据插进去
 			{volist name="wei" id="vo"}
-				jia_num('{$vo.data}','{$vo.time}'{if $vo.type==3},'img'{/if})
+				jia_num('{$vo.data|raw}','{$vo.time}'{if $vo.type==3},'img'{/if})
 			{/volist}
 			
 			//点击加载更多
